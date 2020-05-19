@@ -1,0 +1,15 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+.ipynb_checkpoints
+_/
+results
+#config*
+*.swp
+*.swo
+log
+figs
+vis_results.py
+job_launcher.py

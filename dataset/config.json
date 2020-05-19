@@ -1,0 +1,93 @@
+{
+    "dataset": {
+        "cub": {
+            "classes": {
+                "train": "range(0, 50)",
+                "val": "range(50,100)",
+                "trainval":"range(0,100)",
+                "eval": "range(100, 200)"
+            },
+            "source": "str('/mnt/datasets/CUB_200_2011')",
+            "root":"str('/mnt/datasets/CUB_200_2011')"
+        },
+        "cub_h5": {
+            "classes": {
+                "train": "range(0, 50)",
+                "val": "range(50,100)",
+                "trainval":"range(0,100)",
+                "eval": "range(100, 200)"
+            },
+            "source": "str('/mnt/datasets/CUB_200_2011/cub.h5')",
+            "root":"str('/mnt/datasets/CUB_200_2011/cub.h5')"
+        },
+        "cars": {
+            "classes": {
+                "train": "range(0, 49)",
+                "val": "range(49,98)",
+                "trainval": "range(0, 98)",
+                "eval": "range(98, 196)"
+            },
+            "source": "str('/mnt/datasets/cars196_alt')",
+            "root": "str('/mnt/datasets/cars196_alt')"
+        },
+        "cars_h5": {
+            "classes": {
+                "train": "range(0, 49)",
+                "val": "range(49,98)",
+                "trainval": "range(0, 98)",
+                "eval": "range(98, 196)"
+            },
+            "source": "str('/mnt/datasets/cars196_alt/cars.h5')",
+            "root": "str('/mnt/datasets/cars196_alt/cars.h5')"
+        },
+        "sop": {
+            "source": "str('/mnt/datasets/sop')",
+            "root": "str('/mnt/datasets/sop')",
+            "classes": {
+                "train": "range(0, 5659)",
+                "val": "range(5659, 11318)",
+                "trainval": "range(0, 11318)",
+                "eval": "range(11318, 22634)"
+            }
+        },
+        "sop_h5": {
+            "classes": {
+                "train": "range(0, 5659)",
+                "val": "range(5659,11318)",
+                "trainval": "range(0, 11318)",
+                "eval": "range(11318, 22634)"
+            },
+            "source": "str('/mnt/datasets/sop/sop.h5')",
+            "root": "str('/mnt/datasets//sop/sop.h5')"
+        },
+        "inshop": {
+            "source": "str('/mnt/datasets/inshop')",
+            "root": "str('/mnt/datasets/inshop')",
+            "classes": {
+                "train": "range(0, 1998)",
+                "val": "range(1998, 3997)",
+                "trainval": "range(0, 3997)",
+                "eval": "range(0, 3985)"
+            }
+        },
+        "inshop_h5": {
+            "source": "str('/mnt/datasets/inshop/inshop.h5')",
+            "root": "str('/mnt/datasets/inshop/inshop.h5')",
+            "classes": {
+                "train": "range(0, 1998)",
+                "val": "range(1998, 3997)",
+                "trainval": "range(0, 3997)",
+                "eval": "range(0, 3985)"
+               
+            }
+        }
+    },
+     "transform_parameters": {
+        "rgb_to_bgr": "False", 
+        "intensity_scale": "[[0, 1], [0, 1]]",
+        "mean": "[0.485, 0.456, 0.406]",
+        "std": "[0.229, 0.224, 0.225]",
+        "sz_crop": "256",
+        "sz_resize": "288"
+    }
+}
