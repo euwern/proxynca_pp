@@ -3,10 +3,10 @@ ProxyNCA++: Revisiting and Revitalizing Proxy Neighborhood Component Analysis
 ==============================================================================
 This repo consists of the source code for the [ProxyNCA++ paper](https://arxiv.org/abs/2004.01113)
 
-Make sure to download the corresponding dataset to the correct folder as specified in dataset/config.json
-We also include script to convert the dataset to hdf5 format. .
+<img src="https://i.imgur.com/gCc3EmZ.png" title='Components of ProxyNCA++]' width="600">
 
-![Image of components of ProxyNCA++](https://imgur.com/a/i2JlCzj)
+Make sure to download the corresponding dataset to the correct folder as specified in dataset/config.json
+We also include script to convert the dataset to hdf5 format.
 
 To run the code
 ```
@@ -32,9 +32,9 @@ The following is the Bixtex of our paper:
 ```
 @article{teh2020proxynca++,
   title={ProxyNCA++: Revisiting and Revitalizing Proxy Neighborhood Component Analysis},
-    author={Teh, Eu Wern and DeVries, Terrance and Taylor, Graham W},
-      journal={arXiv preprint arXiv:2004.01113},
-        year={2020}
-        }
+  author={Teh, Eu Wern and DeVries, Terrance and Taylor, Graham W},
+  journal={arXiv preprint arXiv:2004.01113},
+  year={2020}
+}
 ```
 
