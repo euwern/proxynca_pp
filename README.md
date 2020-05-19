@@ -25,3 +25,14 @@ CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset inshop  --config config/insho
 CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset inshop  --config config/inshop.json --mode trainval --apex --seed 0
 
 ```
+
+The following are the Bixtex of our paper:
+```
+@article{teh2020proxynca++,
+  title={ProxyNCA++: Revisiting and Revitalizing Proxy Neighborhood Component Analysis},
+    author={Teh, Eu Wern and DeVries, Terrance and Taylor, Graham W},
+      journal={arXiv preprint arXiv:2004.01113},
+        year={2020}
+        }
+```
+
