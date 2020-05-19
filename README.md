@@ -1,7 +1,7 @@
 
 ProxyNCA++: Revisiting and Revitalizing Proxy Neighborhood Component Analysis
 ==============================================================================
-This repo consists of source code for the [ProxyNCA++ paper](https://arxiv.org/abs/2004.01113)
+This repo consists of the source code for the [ProxyNCA++ paper](https://arxiv.org/abs/2004.01113)
 
 Make sure to download the corresponding dataset to the correct folder as specified in dataset/config.json
 We also include script to convert the dataset to hdf5 format. .
