@@ -26,7 +26,7 @@ CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset inshop  --config config/insho
 
 ```
 
-The following are the Bixtex of our paper:
+The following is the Bixtex of our paper:
 ```
 @article{teh2020proxynca++,
   title={ProxyNCA++: Revisiting and Revitalizing Proxy Neighborhood Component Analysis},
