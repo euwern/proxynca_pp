@@ -6,6 +6,8 @@ This repo consists of the source code for the [ProxyNCA++ paper](https://arxiv.o
 Make sure to download the corresponding dataset to the correct folder as specified in dataset/config.json
 We also include script to convert the dataset to hdf5 format. .
 
+![Image of components of ProxyNCA++](https://imgur.com/a/i2JlCzj)
+
 To run the code
 ```
 # CUB
