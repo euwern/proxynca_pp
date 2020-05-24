@@ -2,7 +2,7 @@
     "name": "str('example')",
     "gpu_id": "int(0)",
     "criterion": {
-        "type": "proxynca.ProxyNCA_prob",
+        "type": "loss.ProxyNCA_prob",
         "args": {
             "scale": "3"
         }
