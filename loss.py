@@ -29,7 +29,7 @@ class ProxyNCA_classic(torch.nn.Module):
 
         #note: self.scale is equal to sqrt(1/T)
         # in the paper T = 1/9, therefore, scale = sart(1/(1/9)) = sqrt(9) = 3
-        #  we need to apply sqrt because the pairwise distance is calcuated as norm^2
+        #  we need to apply sqrt because the pairwise distance is calculated as norm^2
         P = self.scale * F.normalize(P, p = 2, dim = -1)
         X = self.scale * F.normalize(X, p = 2, dim = -1)
         
@@ -59,7 +59,7 @@ class ProxyNCA_prob(torch.nn.Module):
         P = self.proxies
         #note: self.scale is equal to sqrt(1/T)
         # in the paper T = 1/9, therefore, scale = sart(1/(1/9)) = sqrt(9) = 3
-        #  we need to apply sqrt because the pairwise distance is calcuated as norm^2
+        #  we need to apply sqrt because the pairwise distance is calculated as norm^2
        
         P = self.scale * F.normalize(P, p = 2, dim = -1)
         X = self.scale * F.normalize(X, p = 2, dim = -1)

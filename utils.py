@@ -190,46 +190,4 @@ def evaluate_inshop(model, dl_query, dl_gallery,
 
     return nmi, recall
 
-def get_recall_results(model, dataloader):
-    eval_time = time.time()
-    nb_classes = dataloader.dataset.nb_classes()
-
-    # calculate embeddings with model and get targets
-    X, T, I = predict_batchwise(model, dataloader)
-    
-    print('done collecting prediction')
-
-    #eval_time = time.time() - eval_time
-    #logging.info('Eval time: %.2f' % eval_time)
-
-
-    # get predictions by assigning nearest 8 neighbors with euclidian
-    max_dist = 1
-    Y = evaluation.assign_by_euclidian_at_k(X, T, max_dist)
-    Y = torch.from_numpy(Y)
-    
-    recall_results = []
-    for t,y in zip(T,Y):
-        recall_results.append(t in y[:1])
-
-    return recall_results, T, I
-
-def get_recall_results2(model, dataloader):
-    eval_time = time.time()
-    nb_classes = dataloader.dataset.nb_classes()
-
-    # calculate embeddings with model and get targets
-    X, T, I = predict_batchwise(model, dataloader)
-    
-
-    # get predictions by assigning nearest 8 neighbors with euclidian
-    max_dist = 1
-    Y = evaluation.assign_by_euclidian_at_k(X, T, max_dist)
-    Y = torch.from_numpy(Y)
-    
-    recall_results = []
-    for t,y in zip(T,Y):
-        recall_results.append(t in y[:1])
-
-    return recall_results, X, T, I
 
