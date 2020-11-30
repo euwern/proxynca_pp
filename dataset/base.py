@@ -4,8 +4,6 @@ from __future__ import division
 
 import os
 import torch
-import torchvision
-import numpy as np
 import PIL.Image
 from distutils.dir_util import copy_tree
 import io
