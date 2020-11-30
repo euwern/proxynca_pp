@@ -13,3 +13,8 @@ log
 figs
 vis_results.py
 job_launcher.py
+
+.DS_Store
+*/.DS_Store
+.idea/*
+env/*
