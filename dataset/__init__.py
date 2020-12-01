@@ -4,6 +4,7 @@ from .cub import CUBirds, CUBirds_hdf5, CUBirds_class, CUBirds_hdf5_alt, CUBirds
 from .sop import SOProducts, SOProducts_hdf5
 from .inshop import InShop, InShop_hdf5
 from . import utils
+from .similarityShoes import SimilarityShoes
 
 
 import resource
@@ -18,6 +19,7 @@ _type = {
     'cub_h5': CUBirds_hdf5,
     'cub_class' : CUBirds_class,
     'sop': SOProducts,
+    'similarity_shoes':SimilarityShoes,
     'sop_h5': SOProducts_hdf5,
     'sop_h5_mod': SOProducts_hdf5,
     'inshop': InShop,

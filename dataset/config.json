@@ -41,13 +41,23 @@
             "root": "str('/mnt/datasets/cars196_alt/cars.h5')"
         },
         "sop": {
-            "source": "str('/mnt/datasets/sop')",
-            "root": "str('/mnt/datasets/sop')",
+            "source": "str('/home/counterfake/workstation/datasets/sop')",
+            "root": "str('/home/counterfake/workstation/datasets/sop')",
             "classes": {
                 "train": "range(0, 5659)",
                 "val": "range(5659, 11318)",
                 "trainval": "range(0, 11318)",
                 "eval": "range(11318, 22634)"
+            }
+        },
+        "similarity_shoes": {
+            "source": "str('/home/counterfake/workstation/datasets/similarity_shoes')",
+            "root": "str('/home/counterfake/workstation/datasets/similarity_shoes')",
+            "classes": {
+                "train": "range(0, 4261)",
+                "val": "range(4261, 5327)",
+                "trainval": "range(0, 5327)",
+                "eval": "range(5327, 6706)"
             }
         },
         "sop_h5": {
