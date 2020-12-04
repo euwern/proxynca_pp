@@ -54,10 +54,10 @@
             "source": "str('C:\\Workstation\\datasets\\shoes')",
             "root": "str('C:\\Workstation\\datasets\\shoes')",
             "classes": {
-                "train": "range(0, 511)",
-                "val": "range(511, 2046)",
-                "trainval": "range(0, 2046)",
-                "eval": "range(2046, 4101)"
+                "train": "range(0, 1025)",
+                "val": "range(1025, 2051)",
+                "trainval": "range(0, 2051)",
+                "eval": "range(2051, 4101)"
             }
         },
         "sop_h5": {

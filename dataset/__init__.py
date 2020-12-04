@@ -21,7 +21,7 @@ _type = {
     'cub_h5': CUBirds_hdf5,
     'cub_class': CUBirds_class,
     'sop': SOProducts,
-    'similarity_shoes': Shoes,
+    'shoes': Shoes,
     'sop_h5': SOProducts_hdf5,
     'sop_h5_mod': SOProducts_hdf5,
     'inshop': InShop,
