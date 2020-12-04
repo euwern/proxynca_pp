@@ -50,9 +50,9 @@
                 "eval": "range(11318, 22634)"
             }
         },
-        "similarity_shoes": {
-            "source": "str('/home/counterfake/workstation/datasets/similarity_shoes')",
-            "root": "str('/home/counterfake/workstation/datasets/similarity_shoes')",
+        "shoes": {
+            "source": "str('C:\\Workstation\\datasets\\shoes')",
+            "root": "str('C:\\Workstation\\datasets\\shoes')",
             "classes": {
                 "train": "range(0, 511)",
                 "val": "range(511, 2046)",
