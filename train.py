@@ -303,7 +303,7 @@ if args.apex:
     model = torch.nn.DataParallel(model)
 
 if args.mode == 'train' and args.model_path != '':
-    model.load_state_dict(torch.load('results/' + args.model_path + '.pt'))
+    model.load_state_dict(torch.load('results/' + args.model_path, map_location=torch.device('cpu')))
     model = model.cuda()
 
 if args.mode == 'test':
