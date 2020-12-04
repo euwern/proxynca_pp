@@ -97,10 +97,6 @@ if not args.apex:
     model = torch.nn.DataParallel(model)
 model = model.cuda()
 
-if args.model_path != '':
-    model.load_state_dict(torch.load('results/' + args.model_path + '.pt'))
-    model = model.cuda()
-
 
 def save_best_checkpoint(model):
     torch.save(model.state_dict(), 'results/' + args.log_filename + '.pt')
@@ -305,6 +301,10 @@ opt = config['opt']['type'](
 if args.apex:
     [model, criterion], [opt, opt_warmup] = amp.initialize([model, criterion], [opt, opt_warmup], opt_level='O1')
     model = torch.nn.DataParallel(model)
+
+if args.mode == 'train' and args.model_path != '':
+    model.load_state_dict(torch.load('results/' + args.model_path + '.pt'))
+    model = model.cuda()
 
 if args.mode == 'test':
     with torch.no_grad():
