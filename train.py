@@ -31,6 +31,7 @@ parser.add_argument('--init_eval', default=False, action='store_true')
 parser.add_argument('--no_warmup', default=False, action='store_true')
 parser.add_argument('--apex', default=False, action='store_true')
 parser.add_argument('--warmup_k', default=5, type=int)
+parser.add_argument('--model_path', default='', type=str)
 
 args = parser.parse_args()
 
@@ -95,6 +96,10 @@ model = torch.nn.Sequential(feat, emb)
 if not args.apex:
     model = torch.nn.DataParallel(model)
 model = model.cuda()
+
+if args.model_path != '':
+    model.load_state_dict(torch.load('results/' + args.model_path + '.pt'))
+    model = model.cuda()
 
 
 def save_best_checkpoint(model):

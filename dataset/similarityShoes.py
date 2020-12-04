@@ -2,12 +2,12 @@ from .base import *
 from tqdm import tqdm
 
 class SimilarityShoes(BaseDatasetMod):
-    nb_train_all = 24900
-    nb_test_all = 6345
+    nb_train_all = 9131
+    nb_test_all = 9091
     def __init__(self, root, source, classes, transform=None):
         BaseDatasetMod.__init__(self, root, source, classes, transform)
-        classes_train = range(0, 5327)
-        classes_test = range(5327, 6706)
+        classes_train = range(0, 2051)
+        classes_test = range(2051, 4101)
 
         if classes.start in classes_train:
             if classes.stop - 1 in classes_train:

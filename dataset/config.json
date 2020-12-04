@@ -54,10 +54,10 @@
             "source": "str('/home/counterfake/workstation/datasets/similarity_shoes')",
             "root": "str('/home/counterfake/workstation/datasets/similarity_shoes')",
             "classes": {
-                "train": "range(0, 4261)",
-                "val": "range(4261, 5327)",
-                "trainval": "range(0, 5327)",
-                "eval": "range(5327, 6706)"
+                "train": "range(0, 511)",
+                "val": "range(511, 2046)",
+                "trainval": "range(0, 2046)",
+                "eval": "range(2046, 4101)"
             }
         },
         "sop_h5": {
