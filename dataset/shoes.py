@@ -2,13 +2,13 @@ from .base import *
 
 
 class Shoes(BaseDatasetMod):
-    nb_train_all = 9131
-    nb_test_all = 9091
+    nb_train_all = 18348
+    nb_test_all = 18309
 
     def __init__(self, root, source, classes, transform=None):
         BaseDatasetMod.__init__(self, root, source, classes, transform)
-        classes_train = range(0, 2051)
-        classes_test = range(2051, 4101)
+        classes_train = range(0, 3787)
+        classes_test = range(3787, 7573)
 
         if classes.start in classes_train:
             if classes.stop - 1 in classes_train:
@@ -41,4 +41,3 @@ class Shoes(BaseDatasetMod):
                 assert nb_images == type(self).nb_train_all
             else:
                 assert nb_images == type(self).nb_test_all
-

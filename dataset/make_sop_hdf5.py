@@ -50,7 +50,7 @@ with open(
 with open(
     os.path.join(
     root,
-    'Ebay_test.txt'
+    'Shoes_test.txt'
     )
 ) as f:
 

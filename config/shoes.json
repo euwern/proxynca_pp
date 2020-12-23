@@ -1,0 +1,51 @@
+{
+    "name": "str('example')",
+    "gpu_id": "int(0)",
+    "criterion": {
+        "type": "loss.ProxyNCA_prob",
+        "args": {
+            "scale": "3"
+        }
+    },
+    "lr_scheduler": {
+        "type": "torch.optim.lr_scheduler.ReduceLROnPlateau",
+        "args": {
+            "mode": "str('max')",
+            "patience": "4*1"
+        }
+    },
+    "lr_scheduler2": {
+        "type": "torch.optim.lr_scheduler.MultiStepLR"
+        
+    },
+   
+    "nb_epochs": "40*2",
+    "sz_batch": "32*6",
+    "sz_embedding": "2048",
+    "num_class_per_batch": "32*2",
+    "num_gradcum": "1",
+    "is_random_sampler":"False",
+    "transform_key": "str('transform_parameters')",
+    "model":{
+        "type": "networks.Feat_resnet50_max_n"
+    },
+    "opt": {
+        "type": "torch.optim.Adam",
+        "args": {
+            "embedding": {
+                "weight_decay": "0"
+            },
+            "backbone": {
+                "weight_decay": "0"
+            },
+            "proxynca": {
+                "weight_decay": "0", 
+                "lr": "4e1*6"
+            },
+            "base": {
+                "lr": "4e-3*6",
+                "eps": "1.0"
+            }
+        }
+    }
+}

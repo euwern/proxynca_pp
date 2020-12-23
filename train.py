@@ -39,6 +39,7 @@ random.seed(args.seed)
 np.random.seed(args.seed)
 torch.manual_seed(args.seed)
 torch.cuda.manual_seed_all(args.seed)  # set random seed for all gpus
+torch.backends.cudnn.enabled = False
 
 if not os.path.exists('results'):
     os.makedirs('results')
