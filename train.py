@@ -20,6 +20,7 @@ parser.add_argument('--epochs', default=40, type=int, dest='nb_epochs')
 parser.add_argument('--log-filename', default='example')
 parser.add_argument('--workers', default=16, type=int, dest='nb_workers')
 parser.add_argument('--seed', default=0, type=int)
+parser.add_argument('--version', type=str)
 parser.add_argument('--mode', default='train', choices=['train', 'trainval', 'test'],
                     help='train with train data or train with trainval')
 parser.add_argument('--lr_steps', default=[1000], nargs='+', type=int)
@@ -48,7 +49,7 @@ if not os.path.exists('log'):
 
 curr_fn = os.path.basename(args.config).split(".")[0]
 
-out_results_fn = "log/%s_%s_%s_%d.json" % (args.dataset, curr_fn, args.mode, args.seed)
+out_results_fn = "log/%s_%s_%s_%s.json" % (args.dataset, curr_fn, args.mode, args.version)
 
 config = utils.load_config(args.config)
 
@@ -81,7 +82,7 @@ transform_key = 'transform_parameters'
 if 'transform_key' in config.keys():
     transform_key = config['transform_key']
 
-args.log_filename = '%s_%s_%s_%d' % (args.dataset, curr_fn, args.mode, args.seed)
+args.log_filename = '%s_%s_%s_%s' % (args.dataset, curr_fn, args.mode, args.version)
 if args.mode == 'test':
     args.log_filename = args.log_filename.replace('test', 'trainval')
 
@@ -124,60 +125,6 @@ print('best_epoch', best_epoch)
 
 results = {}
 
-if 'inshop' not in args.dataset:
-    dl_ev = torch.utils.data.DataLoader(
-        dataset.load(
-            name=args.dataset,
-            root=dataset_config['dataset'][args.dataset]['root'],
-            source=dataset_config['dataset'][args.dataset]['source'],
-            classes=dataset_config['dataset'][args.dataset]['classes']['eval'],
-            transform=dataset.utils.make_transform(
-                **dataset_config[transform_key],
-                is_train=False
-            )
-        ),
-        batch_size=args.sz_batch,
-        shuffle=False,
-        num_workers=args.nb_workers,
-        # pin_memory = True
-    )
-else:
-    # inshop trainval mode
-    dl_query = torch.utils.data.DataLoader(
-        dataset.load_inshop(
-            name=args.dataset,
-            root=dataset_config['dataset'][args.dataset]['root'],
-            source=dataset_config['dataset'][args.dataset]['source'],
-            classes=dataset_config['dataset'][args.dataset]['classes']['eval'],
-            transform=dataset.utils.make_transform(
-                **dataset_config[transform_key],
-                is_train=False
-            ),
-            dset_type='query'
-        ),
-        batch_size=args.sz_batch,
-        shuffle=False,
-        num_workers=args.nb_workers,
-        # pin_memory = True
-    )
-    dl_gallery = torch.utils.data.DataLoader(
-        dataset.load_inshop(
-            name=args.dataset,
-            root=dataset_config['dataset'][args.dataset]['root'],
-            source=dataset_config['dataset'][args.dataset]['source'],
-            classes=dataset_config['dataset'][args.dataset]['classes']['eval'],
-            transform=dataset.utils.make_transform(
-                **dataset_config[transform_key],
-                is_train=False
-            ),
-            dset_type='gallery'
-        ),
-        batch_size=args.sz_batch,
-        shuffle=False,
-        num_workers=args.nb_workers,
-        # pin_memory = True
-    )
-
 logging.basicConfig(
     format="%(asctime)s %(message)s",
     level=logging.INFO,
@@ -219,7 +166,7 @@ dl_tr = torch.utils.data.DataLoader(
     tr_dataset,
     batch_sampler=batch_sampler,
     num_workers=args.nb_workers,
-    # pin_memory = True
+    pin_memory = True
 )
 
 print("===")
@@ -239,7 +186,24 @@ if args.mode == 'train':
         shuffle=False,
         num_workers=args.nb_workers,
         # drop_last=True
-        # pin_memory = True
+        pin_memory = True
+    )
+elif args.mode == 'trainval' or args.mode == 'test':
+    dl_ev = torch.utils.data.DataLoader(
+        dataset.load(
+            name=args.dataset,
+            root=dataset_config['dataset'][args.dataset]['root'],
+            source=dataset_config['dataset'][args.dataset]['source'],
+            classes=dataset_config['dataset'][args.dataset]['classes']['eval'],
+            transform=dataset.utils.make_transform(
+                **dataset_config[transform_key],
+                is_train=False
+            )
+        ),
+        batch_size=args.sz_batch,
+        shuffle=False,
+        num_workers=args.nb_workers,
+        pin_memory = True
     )
 
 criterion = config['criterion']['type'](
@@ -311,10 +275,8 @@ if args.mode == 'test':
     with torch.no_grad():
         logging.info("**Evaluating...(test mode)**")
         model = load_best_checkpoint(model)
-        if 'inshop' in args.dataset:
-            utils.evaluate_inshop(model, dl_query, dl_gallery)
-        else:
-            utils.evaluate(model, dl_ev, args.eval_nmi, args.recall)
+
+        utils.evaluate(model, dl_ev, args.eval_nmi, args.recall)
 
     exit()
 
@@ -337,16 +299,6 @@ scores = []
 scores_tr = []
 
 t1 = time.time()
-
-if args.init_eval:
-    logging.info("**Evaluating initial model...**")
-    with torch.no_grad():
-        if args.mode == 'train':
-            c_dl = dl_val
-        else:
-            c_dl = dl_ev
-
-        utils.evaluate(model, c_dl, args.eval_nmi, args.recall)  # dl_val
 
 it = 0
 
@@ -517,28 +469,17 @@ if args.mode == 'trainval':
     with torch.no_grad():
         logging.info("**Evaluating...**")
         model = load_best_checkpoint(model)
-        if 'inshop' in args.dataset:
-            best_test_nmi, (best_test_r1, best_test_r10, best_test_r20, best_test_r30, best_test_r40,
-                            best_test_r50) = utils.evaluate_inshop(model, dl_query, dl_gallery)
-        else:
-            best_test_nmi, (best_test_r1, best_test_r2, best_test_r4, best_test_r8) = utils.evaluate(model, dl_ev,
+
+        best_test_nmi, (best_test_r1, best_test_r2, best_test_r4, best_test_r8) = utils.evaluate(model, dl_ev,
                                                                                                      args.eval_nmi,
                                                                                                      args.recall)
         # logging.info('Best test r8: %s', str(best_test_r8))
-    if 'inshop' in args.dataset:
-        results['NMI'] = best_test_nmi
-        results['R1'] = best_test_r1
-        results['R10'] = best_test_r10
-        results['R20'] = best_test_r20
-        results['R30'] = best_test_r30
-        results['R40'] = best_test_r40
-        results['R50'] = best_test_r50
-    else:
-        results['NMI'] = best_test_nmi
-        results['R1'] = best_test_r1
-        results['R2'] = best_test_r2
-        results['R4'] = best_test_r4
-        results['R8'] = best_test_r8
+
+    results['NMI'] = best_test_nmi
+    results['R1'] = best_test_r1
+    results['R2'] = best_test_r2
+    results['R4'] = best_test_r4
+    results['R8'] = best_test_r8
 
 if args.mode == 'train':
     print('lr_steps', lr_steps)

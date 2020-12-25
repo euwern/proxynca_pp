@@ -54,10 +54,10 @@
             "source": "str('/home/counterfake/workstation/datasets/proxy/shoes_v0_2')",
             "root": "str('/home/counterfake/workstation/datasets/proxy/shoes_v0_2')",
             "classes": {
-                "train": "range(0, 1894)",
-                "val": "range(1894, 3787)",
-                "trainval": "range(0, 3787)",
-                "eval": "range(3787, 7573)"
+                "train": "range(0, 1893)",
+                "val": "range(1893, 3786)",
+                "trainval": "range(0, 3786)",
+                "eval": "range(3786, 7572)"
             }
         },
         "sop_h5": {

@@ -1,8 +1,6 @@
 import torchvision.models as models
 import torch.nn as nn
-import torch
-import numpy as np
-import torch.nn.functional as F
+
 
 class Feature(nn.Module):
     def __init__(self, model='resnet50', pool='avg', use_lnorm=False):
@@ -11,7 +9,7 @@ class Feature(nn.Module):
 
         self.base = models.__dict__[model](pretrained=True)
         if pool == 'avg':
-            self.pool = nn.AdaptiveAvgPool2d((1, 1))        
+            self.pool = nn.AdaptiveAvgPool2d((1, 1))
         elif pool == 'max':
             self.pool = nn.AdaptiveMaxPool2d((1, 1))
         else:
@@ -35,25 +33,42 @@ class Feature(nn.Module):
         x = x1
         x = x.reshape(x.size(0), -1)
 
-        if self.lnorm != None:
+        if self.lnorm is not None:
             x = self.lnorm(x)
 
         return x
 
+
 class Feat_resnet50_max(Feature):
-     def __init__(self):
+    def __init__(self):
         Feature.__init__(self, model='resnet50', pool='max')
 
+
 class Feat_resnet50_avg(Feature):
-     def __init__(self):
+    def __init__(self):
         Feature.__init__(self, model='resnet50', pool='avg')
 
+
 class Feat_resnet50_max_n(Feature):
-     def __init__(self):
+    def __init__(self):
         Feature.__init__(self, model='resnet50', pool='max', use_lnorm=True)
 
+
 class Feat_resnet50_avg_n(Feature):
-     def __init__(self):
+    def __init__(self):
         Feature.__init__(self, model='resnet50', pool='avg', use_lnorm=True)
 
 
+class Feat_resnet152_max_n(Feature):
+    def __init__(self):
+        Feature.__init__(self, model='resnet152', pool='max', use_lnorm=True)
+
+
+class Feat_wide_resnet50_2_max_n(Feature):
+    def __init__(self):
+        Feature.__init__(self, model='wide_resnet50_2', pool='max', use_lnorm=True)
+
+
+class Feat_wide_resnet101_2_max_n(Feature):
+    def __init__(self):
+        Feature.__init__(self, model='wide_resnet101_2', pool='max', use_lnorm=True)

@@ -19,8 +19,8 @@
         
     },
    
-    "nb_epochs": "40*2",
-    "sz_batch": "32*6",
+    "nb_epochs": "50*2",
+    "sz_batch": "100",
     "sz_embedding": "2048",
     "num_class_per_batch": "32*2",
     "num_gradcum": "1",
