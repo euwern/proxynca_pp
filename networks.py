@@ -66,6 +66,11 @@ class Feat_resnet152_max_n(Feature):
         Feature.__init__(self, model='resnet152', pool='max', use_lnorm=True)
 
 
+class Feat_resnet152_max(Feature):
+    def __init__(self):
+        Feature.__init__(self, model='resnet152', pool='max')
+
+
 class Feat_wide_resnet50_2_max_n(Feature):
     def __init__(self):
         Feature.__init__(self, model='wide_resnet50_2', pool='max', use_lnorm=True)
@@ -75,7 +80,3 @@ class Feat_wide_resnet101_2_max_n(Feature):
     def __init__(self):
         Feature.__init__(self, model='wide_resnet101_2', pool='max', use_lnorm=True)
 
-        
-class Feat_resnet152_max(Feature):
-    def __init__(self):
-        Feature.__init__(self, model='resnet152', pool='max')

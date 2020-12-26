@@ -9,8 +9,8 @@ import logging
 import loss
 import json
 import networks
+import networks_with_efficientnet
 import time
-#import margin_net
 import similarity
 
 # __repr__ may contain `\n`, json replaces it by `\\n` + indent

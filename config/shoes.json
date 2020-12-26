@@ -25,7 +25,7 @@
     "is_random_sampler":"False",
     "transform_key": "str('transform_parameters')",
     "model":{
-        "type": "networks.Feat_resnet152_max"
+        "type": "networks_with_efficientnet.Feat_efficientNet_b0_max_n"
     },
     "opt": {
         "type": "torch.optim.Adam",
