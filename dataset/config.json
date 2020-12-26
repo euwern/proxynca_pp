@@ -51,8 +51,8 @@
             }
         },
         "shoes": {
-            "source": "str('/home/counterfake/workstation/datasets/proxy/shoes_v0_2')",
-            "root": "str('/home/counterfake/workstation/datasets/proxy/shoes_v0_2')",
+            "source": "str('/home/ubuntu/workstation/datasets/shoe')",
+            "root": "str('/home/ubuntu/workstation/datasets/shoe')",
             "classes": {
                 "train": "range(0, 1893)",
                 "val": "range(1893, 3786)",
@@ -100,7 +100,7 @@
         "sz_crop": "256",
         "sz_resize": "288",
         "rotate": "90",
-         "jitter": "0.2",
-         "hue": "0.2"
+         "jitter": "0",
+         "hue": "0"
     }
 }

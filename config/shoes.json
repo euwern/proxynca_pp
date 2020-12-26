@@ -16,18 +16,16 @@
     },
     "lr_scheduler2": {
         "type": "torch.optim.lr_scheduler.MultiStepLR"
-        
     },
-   
-    "nb_epochs": "50*2",
-    "sz_batch": "100",
+    "nb_epochs": "50*3",
+    "sz_batch": "32*6",
     "sz_embedding": "2048",
     "num_class_per_batch": "32*2",
     "num_gradcum": "1",
     "is_random_sampler":"False",
     "transform_key": "str('transform_parameters')",
     "model":{
-        "type": "networks.Feat_resnet50_max_n"
+        "type": "networks.Feat_resnet152_max"
     },
     "opt": {
         "type": "torch.optim.Adam",
