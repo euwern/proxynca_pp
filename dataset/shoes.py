@@ -2,13 +2,13 @@ from .base import *
 
 
 class Shoes(BaseDatasetMod):
-    nb_train_all = 18365
-    nb_test_all = 18283
+    nb_train_all = 133297
+    nb_test_all = 133108
 
     def __init__(self, root, source, classes, transform=None):
         BaseDatasetMod.__init__(self, root, source, classes, transform)
-        classes_train = range(0, 3786)
-        classes_test = range(3786, 7572)
+        classes_train = range(0, 20256)
+        classes_test = range(20256, 40512)
 
         if classes.start in classes_train:
             if classes.stop - 1 in classes_train:
