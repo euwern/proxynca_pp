@@ -400,13 +400,28 @@ for e in range(0, args.nb_epochs):
             opt.zero_grad()
 
     time_per_epoch_2 = time.time()
-    losses.append(np.mean(losses_per_epoch[-20:]))
+    losses.append(np.mean(losses_per_epoch))
+
+    val_loss = 0
+
+    if args.mode == 'trainval':
+        val_losses_per_epoch = []
+        for ct, (x, y, _) in enumerate(dl_ev):
+            with torch.no_grad:
+                m = model(x.cuda())
+                loss = criterion(m, y.cuda())
+
+                val_losses_per_epoch.append(loss.data.cpu().numpy())
+
+        val_loss = np.mean(val_losses_per_epoch)
+
     print('it: {}'.format(it))
     print(opt)
     logging.info(
-        "Epoch: {}, loss: {:.3f}, time (seconds): {:.2f}.".format(
+        "Epoch: {}, loss: {:.3f}, val loss: {:.3f} ,time (seconds): {:.2f}.".format(
             e,
             losses[-1],
+            val_loss,
             time_per_epoch_2 - time_per_epoch_1
         )
     )

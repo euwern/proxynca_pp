@@ -54,10 +54,10 @@
             "source": "str('/home/ubuntu/workstation/datasets/shoe')",
             "root": "str('/home/ubuntu/workstation/datasets/shoe')",
             "classes": {
-                "train": "range(0, 1893)",
-                "val": "range(1893, 3786)",
-                "trainval": "range(0, 3786)",
-                "eval": "range(3786, 7572)"
+                "train": "range(0, 10128)",
+                 "val": "range(10128, 20256)",
+                 "trainval": "range(0, 20256)",
+                 "eval": "range(20256, 40512)"
             }
         },
         "sop_h5": {
