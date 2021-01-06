@@ -7,8 +7,9 @@ nb_train_all = 133239
 nb_test_all = 133166
 img_count = nb_train_all + nb_test_all
 
-root = '/home/counterfake/workstation/datasets/proxy/shoes_v0_3'
-data = h5py.File(os.path.join(root, 'shoes.h5'), 'w-')
+source = '/home/counterfake/workstation/datasets/proxy/shoes_v0_3'
+output = '../'
+data = h5py.File(os.path.join(output, 'shoes.h5'), 'w-')
 dt = h5py.special_dtype(vlen=np.dtype('uint8'))
 data.create_dataset(name='x', shape=(img_count, ), dtype=dt)
 data.create_dataset(name='y', shape=(img_count, 1), dtype='int32')
@@ -19,7 +20,7 @@ ix = 0
 ##train
 with open(
     os.path.join(
-    root,
+    source,
     'Shoes_train.txt'
     )
 ) as f:
@@ -47,7 +48,7 @@ with open(
 ##test
 with open(
     os.path.join(
-    root,
+    source,
     'Shoes_test.txt'
     )
 ) as f:
