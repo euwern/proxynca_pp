@@ -2,15 +2,13 @@ import h5py
 import os 
 import numpy as np
 from tqdm import tqdm
-import torchvision
-import scipy.io
 
-nb_train_all = 59551
-nb_test_all = 60502
+nb_train_all = 133239
+nb_test_all = 133166
 img_count = nb_train_all + nb_test_all
 
-root = '/mnt/datasets/sop'
-data = h5py.File(os.path.join(root, 'sop.h5'), 'w')
+root = '/home/counterfake/workstation/datasets/proxy/shoes_v0_3'
+data = h5py.File(os.path.join(root, 'shoes.h5'), 'w-')
 dt = h5py.special_dtype(vlen=np.dtype('uint8'))
 data.create_dataset(name='x', shape=(img_count, ), dtype=dt)
 data.create_dataset(name='y', shape=(img_count, 1), dtype='int32')
@@ -22,7 +20,7 @@ ix = 0
 with open(
     os.path.join(
     root,
-    'Ebay_train.txt'
+    'Shoes_train.txt'
     )
 ) as f:
 
@@ -50,7 +48,7 @@ with open(
 with open(
     os.path.join(
     root,
-    'Ebay_test.txt'
+    'Shoes_test.txt'
     )
 ) as f:
 

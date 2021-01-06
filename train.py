@@ -1,4 +1,7 @@
 import logging
+
+from tqdm import tqdm
+
 import dataset
 import utils
 
@@ -165,8 +168,7 @@ else:
 dl_tr = torch.utils.data.DataLoader(
     tr_dataset,
     batch_sampler=batch_sampler,
-    num_workers=args.nb_workers,
-    pin_memory = True
+    num_workers=args.nb_workers
 )
 
 print("===")
@@ -184,9 +186,7 @@ if args.mode == 'train':
         ),
         batch_size=args.sz_batch,
         shuffle=False,
-        num_workers=args.nb_workers,
-        # drop_last=True
-        pin_memory = True
+        num_workers=args.nb_workers
     )
 elif args.mode == 'trainval' or args.mode == 'test':
     dl_ev = torch.utils.data.DataLoader(
@@ -202,8 +202,7 @@ elif args.mode == 'trainval' or args.mode == 'test':
         ),
         batch_size=args.sz_batch,
         shuffle=False,
-        num_workers=args.nb_workers,
-        pin_memory = True
+        num_workers=args.nb_workers
     )
 
 criterion = config['criterion']['type'](
@@ -348,7 +347,7 @@ if not args.no_warmup:
     # warm up training for 5 epochs
     logging.info("**warm up for %d epochs.**" % args.warmup_k)
     for e in range(0, args.warmup_k):
-        for ct, (x, y, _) in enumerate(dl_tr):
+        for ct, (x, y, _) in tqdm(enumerate(dl_tr)):
             opt_warmup.zero_grad()
             m = model(x.cuda())
             loss = criterion(m, y.cuda())
@@ -377,7 +376,7 @@ for e in range(0, args.nb_epochs):
     tnmi = []
 
     opt.zero_grad()
-    for ct, (x, y, _) in enumerate(dl_tr):
+    for ct, (x, y, _) in tqdm(enumerate(dl_tr)):
         it += 1
 
         m = model(x.cuda())
