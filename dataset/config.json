@@ -60,6 +60,16 @@
                  "eval": "range(20256, 40512)"
             }
         },
+        "shoes_h5": {
+            "source": "str('/home/ubuntu/workstation/datasets/shoe/shoes.h5')",
+            "root": "str('/home/ubuntu/workstation/datasets/shoe/shoes.h5')",
+            "classes": {
+                "train": "range(0, 10128)",
+                 "val": "range(10128, 20256)",
+                 "trainval": "range(0, 20256)",
+                 "eval": "range(20256, 40512)"
+            }
+        },
         "sop_h5": {
             "classes": {
                 "train": "range(0, 5659)",

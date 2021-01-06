@@ -36,15 +36,16 @@ all = os.listdir(args.path)
 random.shuffle(all)
 folders = np.array([folder for folder in all if os.path.isdir(os.path.join(args.path, folder))])
 
-break_point1 = int(math.ceil(len(folders) / 2))
-break_point2 = int(math.ceil(break_point1 / 2))
+break_point_half = int(math.ceil(len(folders) / 1))
+break_point_quarter = int(math.ceil(break_point_half / 2))
+break_point3 = int(math.ceil(break_point_quarter / 2))
 
-trainval = folders[:break_point1]
-eval = folders[break_point1:]
-train = trainval[:break_point2]
-val = trainval[break_point2:]
+trainval = folders[:break_point_quarter]
+eval = folders[break_point_quarter:break_point_half]
+train = trainval[:break_point3]
+val = trainval[break_point3:break_point_quarter]
 
-print('"train": "range(0, %d)", \n "val": "range(%d, %d)", \n "trainval": "range(0, %d)", \n "eval": "range(%d, %d)"' % (break_point2, break_point2, break_point1, break_point1, break_point1, len(folders)))
+print('"train": "range(0, %d)", \n "val": "range(%d, %d)", \n "trainval": "range(0, %d)", \n "eval": "range(%d, %d)"' % (break_point3, break_point3, break_point_quarter, break_point_quarter, break_point_quarter, break_point_half))
 
 # klasörleri listeleme
 for item in trainval:

@@ -4,7 +4,7 @@ from .cub import CUBirds, CUBirds_hdf5, CUBirds_class, CUBirds_hdf5_alt, CUBirds
 from .sop import SOProducts, SOProducts_hdf5
 from .inshop import InShop, InShop_hdf5
 from . import utils
-from .shoes import Shoes
+from .shoes import Shoes, Shoes_hdf5
 
 if os.name == 'posix':
     import resource  # pylint: disable=import-error
@@ -21,6 +21,7 @@ _type = {
     'cub_class': CUBirds_class,
     'sop': SOProducts,
     'shoes': Shoes,
+    'shoes_h5': Shoes_hdf5,
     'sop_h5': SOProducts_hdf5,
     'sop_h5_mod': SOProducts_hdf5,
     'inshop': InShop,
