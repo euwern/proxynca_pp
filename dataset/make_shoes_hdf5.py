@@ -3,12 +3,13 @@ import os
 import numpy as np
 from tqdm import tqdm
 
-nb_train_all = 133239
-nb_test_all = 133166
+nb_train_all = 66812
+nb_test_all = 66653
 img_count = nb_train_all + nb_test_all
 
-source = '/home/counterfake/workstation/datasets/proxy/shoes_v0_3'
-output = '../'
+
+source = '/home/ubuntu/workstation/datasets/shoe'
+output = '/home/ubuntu/workstation/proxynca'
 data = h5py.File(os.path.join(output, 'shoes.h5'), 'w-')
 dt = h5py.special_dtype(vlen=np.dtype('uint8'))
 data.create_dataset(name='x', shape=(img_count, ), dtype=dt)
@@ -30,7 +31,7 @@ with open(
 
     for (image_id, class_id, _, path) in tqdm(map(str.split, f), total=nb_train_all):
         nb_images += 1
-        img_path = os.path.join(root, path)
+        img_path = os.path.join(source, path)
 
         c_f = open(img_path, 'rb')   
         img_bytes = c_f.read()
@@ -58,7 +59,7 @@ with open(
 
     for (image_id, class_id, _, path) in tqdm(map(str.split, f), total=nb_test_all):
         nb_images += 1
-        img_path = os.path.join(root, path)
+        img_path = os.path.join(source, path)
 
         c_f = open(img_path, 'rb')   
         img_bytes = c_f.read()

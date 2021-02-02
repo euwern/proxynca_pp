@@ -32,15 +32,14 @@ def pairwise_distance(a, squared=False):
     pairwise_distances = torch.mul(
         pairwise_distances,
         (error_mask == False).float()
-    )
+    ).cpu()
 
     # Explicitly set diagonals to zero.
     mask_offdiagonals = 1 - torch.eye(
-        *pairwise_distances.size(),
-        device=pairwise_distances.device
+        *pairwise_distances.size()
     )
     pairwise_distances = torch.mul(pairwise_distances, mask_offdiagonals)
 
-    return pairwise_distances
+    return pairwise_distances.cuda()
 
 

@@ -36,7 +36,7 @@ all = os.listdir(args.path)
 random.shuffle(all)
 folders = np.array([folder for folder in all if os.path.isdir(os.path.join(args.path, folder))])
 
-break_point_half = int(math.ceil(len(folders) / 1))
+break_point_half = int(math.ceil(len(folders) / 2))
 break_point_quarter = int(math.ceil(break_point_half / 2))
 break_point3 = int(math.ceil(break_point_quarter / 2))
 
