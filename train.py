@@ -403,10 +403,10 @@ for e in range(0, args.nb_epochs):
 
     val_loss = 0
 
-    if args.mode == 'trainval':
+    if args.mode == 'trainval' and e % 4 == 0:
         val_losses_per_epoch = []
-        for ct, (x, y, _) in enumerate(dl_ev):
-            with torch.no_grad:
+        for ct, (x, y, _) in tqdm(enumerate(dl_ev)):
+            with torch.no_grad():
                 m = model(x.cuda())
                 loss = criterion(m, y.cuda())
 

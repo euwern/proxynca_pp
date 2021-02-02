@@ -17,8 +17,8 @@
     "lr_scheduler2": {
         "type": "torch.optim.lr_scheduler.MultiStepLR"
     },
-    "nb_epochs": "50*3",
-    "sz_batch": "32*6",
+    "nb_epochs": "40",
+    "sz_batch": "112",
     "sz_embedding": "2048",
     "num_class_per_batch": "32*2",
     "num_gradcum": "1",
