@@ -64,6 +64,7 @@ def make_transform(sz_resize=256, sz_crop=227, mean=None,
         mean = [104, 117, 128]
     return transforms.Compose([
         RGBToBGR() if rgb_to_bgr else Identity(),
+        transforms.Grayscale() if is_train else Identity(),
         transforms.RandomRotation(rotate) if is_train else Identity(),
         transforms.RandomResizedCrop(sz_crop) if is_train else Identity(),
         transforms.Resize(sz_resize) if not is_train else Identity(),
