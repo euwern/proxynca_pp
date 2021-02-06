@@ -34,6 +34,7 @@ parser.add_argument('--no_warmup', default=False, action='store_true')
 parser.add_argument('--apex', default=False, action='store_true')
 parser.add_argument('--warmup_k', default=5, type=int)
 parser.add_argument('--model_path', default='', type=str)
+parser.add_argument('--version', type=str)
 
 args = parser.parse_args()
 
@@ -41,12 +42,10 @@ random.seed(0)
 np.random.seed(0)
 torch.manual_seed(0)
 torch.cuda.manual_seed_all(0)  # set random seed for all gpus
-torch.backends.cudnn.enabled = False
-
 
 curr_fn = os.path.basename(args.config).split(".")[0]
 
-out_results_fn = "log/%s_%s_%s_%d.json" % (args.dataset, curr_fn, args.mode, args.seed)
+out_results_fn = "log/%s_%s_%s_%s.json" % (args.dataset, curr_fn, args.mode, args.version)
 
 config = utils.load_config(args.config)
 
@@ -60,11 +59,11 @@ args.sz_embedding = config['sz_embedding']
 transform_key = 'transform_parameters'
 if 'transform_key' in config.keys():
     transform_key = config['transform_key']
+    
+args.log_filename = '%s_%s_%s_%s' % (args.dataset, curr_fn, args.mode, args.version)
 
-if args.log_filename is None:
-    args.log_filename = '%s_%s_%s_%d' % (args.dataset, curr_fn, args.mode, args.seed)
-    if args.mode == 'test':
-        args.log_filename = args.log_filename.replace('test', 'trainval')
+if args.mode == 'test':
+    args.log_filename = args.log_filename.replace('test', 'trainval')
 
 feat = config['model']['type']()
 feat.eval()
