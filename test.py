@@ -6,12 +6,9 @@ import os
 
 import torch
 import numpy as np
-import time
 import argparse
 import json
 import random
-
-
 
 parser = argparse.ArgumentParser(description='Training ProxyNCA++')
 parser.add_argument('--dataset', default='cub')
@@ -55,11 +52,10 @@ args.nb_epochs = config['nb_epochs']
 args.sz_batch = config['sz_batch']
 args.sz_embedding = config['sz_embedding']
 
-
 transform_key = 'transform_parameters'
 if 'transform_key' in config.keys():
     transform_key = config['transform_key']
-    
+
 args.log_filename = '%s_%s_%s_%s' % (args.dataset, curr_fn, args.mode, args.version)
 
 if args.mode == 'test':
@@ -88,7 +84,7 @@ def load_best_checkpoint(model):
 
 
 if args.mode == 'trainval':
-    train_results_fn = "log/%s_%s_%s_%d.json" % (args.dataset, curr_fn, 'train', args.seed)
+    train_results_fn = "log/%s_%s_%s_%s.json" % (args.dataset, curr_fn, 'train', args.version)
     if os.path.exists(train_results_fn):
         with open(train_results_fn, 'r') as f:
             train_results = json.load(f)
@@ -102,22 +98,21 @@ train_transform = dataset.utils.make_transform(
 results = {}
 
 dl_ev = torch.utils.data.DataLoader(
-        dataset.load(
-            name=args.dataset,
-            root=dataset_config['dataset'][args.dataset]['root'],
-            source=dataset_config['dataset'][args.dataset]['source'],
-            classes=dataset_config['dataset'][args.dataset]['classes']['eval'],
-            transform=dataset.utils.make_transform(
-                **dataset_config[transform_key],
-                is_train=False
-            )
-        ),
-        batch_size=args.sz_batch,
-        shuffle=False,
-        num_workers=args.nb_workers,
-        # pin_memory = True
-    )
-
+    dataset.load(
+        name=args.dataset,
+        root=dataset_config['dataset'][args.dataset]['root'],
+        source=dataset_config['dataset'][args.dataset]['source'],
+        classes=dataset_config['dataset'][args.dataset]['classes']['eval'],
+        transform=dataset.utils.make_transform(
+            **dataset_config[transform_key],
+            is_train=False
+        )
+    ),
+    batch_size=args.sz_batch,
+    shuffle=False,
+    num_workers=args.nb_workers,
+    # pin_memory = True
+)
 
 logging.basicConfig(
     format="%(asctime)s %(message)s",
@@ -127,7 +122,6 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
-
 
 if args.mode == 'train':
     tr_dataset = dataset.load(
@@ -145,7 +139,6 @@ elif args.mode == 'trainval' or args.mode == 'test':
         classes=dataset_config['dataset'][args.dataset]['classes']['trainval'],
         transform=train_transform
     )
-
 
 num_class_per_batch = config['num_class_per_batch']
 num_gradcum = config['num_gradcum']
@@ -170,8 +163,8 @@ with torch.no_grad():
     model = load_best_checkpoint(model)
 
     best_test_nmi, (best_test_r1, best_test_r2, best_test_r4, best_test_r8) = utils.evaluate(model, dl_ev,
-                                                                                                 args.eval_nmi,
-                                                                                                 args.recall)
+                                                                                             args.eval_nmi,
+                                                                                             args.recall)
     # logging.info('Best test r8: %s', str(best_test_r8))
 
     results['NMI'] = best_test_nmi
@@ -179,7 +172,6 @@ with torch.no_grad():
     results['R2'] = best_test_r2
     results['R4'] = best_test_r4
     results['R8'] = best_test_r8
-
 
 with open(out_results_fn, 'w') as outfile:
     json.dump(results, outfile)

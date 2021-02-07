@@ -43,7 +43,7 @@ random.seed(args.seed)
 np.random.seed(args.seed)
 torch.manual_seed(args.seed)
 torch.cuda.manual_seed_all(args.seed)  # set random seed for all gpus
-#torch.backends.cudnn.enabled = False
+# torch.backends.cudnn.enabled = False
 
 if not os.path.exists('results'):
     os.makedirs('results')
@@ -114,7 +114,7 @@ def load_best_checkpoint(model):
 
 
 if args.mode == 'trainval':
-    train_results_fn = "log/%s_%s_%s_%d.json" % (args.dataset, curr_fn, 'train', args.seed)
+    train_results_fn = "log/%s_%s_%s_%s.json" % (args.dataset, curr_fn, 'train', args.version)
     if os.path.exists(train_results_fn):
         with open(train_results_fn, 'r') as f:
             train_results = json.load(f)
@@ -124,7 +124,6 @@ if args.mode == 'trainval':
 train_transform = dataset.utils.make_transform(
     **dataset_config[transform_key]
 )
-print('best_epoch', best_epoch)
 
 results = {}
 
@@ -136,6 +135,8 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
+
+logging.info('best_epoch {}'.format(best_epoch))
 
 if args.mode == 'train':
     tr_dataset = dataset.load(
@@ -410,7 +411,6 @@ for e in range(0, args.nb_epochs):
                 m = model(x.cuda())
                 loss = criterion(m, y.cuda())
 
-
     print('it: {}'.format(it))
     print(opt)
     logging.info(
@@ -482,8 +482,8 @@ if args.mode == 'trainval':
         model = load_best_checkpoint(model)
 
         best_test_nmi, (best_test_r1, best_test_r2, best_test_r4, best_test_r8) = utils.evaluate(model, dl_ev,
-                                                                                                     args.eval_nmi,
-                                                                                                     args.recall)
+                                                                                                 args.eval_nmi,
+                                                                                                 args.recall)
         # logging.info('Best test r8: %s', str(best_test_r8))
 
     results['NMI'] = best_test_nmi
