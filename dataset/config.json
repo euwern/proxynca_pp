@@ -61,13 +61,13 @@
             }
         },
         "shoes_h5": {
-            "source": "str('/home/ubuntu/workstation/proxynca/shoes.h5')",
-            "root": "str('/home/ubuntu/workstation/proxynca/shoes.h5')",
+            "source": "str('/home/counterfake/workstation/proxynca_pp/shoes.h5')",
+            "root": "str('/home/counterfake/workstation/proxynca_pp/shoes.h5')",
             "classes": {
                 "train": "range(0, 5064)",
- 		"val": "range(5064, 10128)",
- 		"trainval": "range(0, 10128)",
- 		"eval": "range(10128, 20256)"
+                 "val": "range(5064, 10128)",
+                 "trainval": "range(0, 10128)",
+                 "eval": "range(10128, 20256)"
             }
         },
         "sop_h5": {

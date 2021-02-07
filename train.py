@@ -34,7 +34,7 @@ parser.add_argument('--recall', default=[1, 2, 4, 8], nargs='+', type=int)
 parser.add_argument('--init_eval', default=False, action='store_true')
 parser.add_argument('--no_warmup', default=False, action='store_true')
 parser.add_argument('--apex', default=False, action='store_true')
-parser.add_argument('--warmup_k', default=5, type=int)
+parser.add_argument('--warmup_k', default=0, type=int)
 parser.add_argument('--model_path', default='', type=str)
 
 args = parser.parse_args()
@@ -410,9 +410,6 @@ for e in range(0, args.nb_epochs):
                 m = model(x.cuda())
                 loss = criterion(m, y.cuda())
 
-                val_losses_per_epoch.append(loss.data.cpu().numpy())
-
-        val_loss = np.mean(val_losses_per_epoch)
 
     print('it: {}'.format(it))
     print(opt)
