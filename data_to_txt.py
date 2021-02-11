@@ -18,25 +18,11 @@ image_id = 0
 class_id = 0
 counts = []
 
-
-def yazdir(class_id, path, dir, image_id, folder):
-    # print(path)
-    files = os.listdir(path)
-    for item in files:
-        file = path + "/" + item
-        if os.path.isfile(file):
-            image_id += 1
-            file_path = dir + "/" + item
-            folder.write(str(image_id) + " " + str(class_id) + " " + "1" + " " + str(file_path.replace('\\', '/')) + "\n")
-
-    return image_id
-
-
 all = os.listdir(args.path)
 random.shuffle(all)
 folders = np.array([folder for folder in all if os.path.isdir(os.path.join(args.path, folder))])
 
-break_point_half = int(math.ceil(len(folders) / 2))
+break_point_half = int(math.ceil(len(folders)))
 break_point_quarter = int(math.ceil(break_point_half / 2))
 break_point3 = int(math.ceil(break_point_quarter / 2))
 
@@ -45,7 +31,25 @@ eval = folders[break_point_quarter:break_point_half]
 train = trainval[:break_point3]
 val = trainval[break_point3:break_point_quarter]
 
-print('"train": "range(0, %d)", \n "val": "range(%d, %d)", \n "trainval": "range(0, %d)", \n "eval": "range(%d, %d)"' % (break_point3, break_point3, break_point_quarter, break_point_quarter, break_point_quarter, break_point_half))
+print(
+    '"train": "range(0, %d)", \n "val": "range(%d, %d)", \n "trainval": "range(0, %d)", \n "eval": "range(%d, %d)"' % (
+    break_point3, break_point3, break_point_quarter, break_point_quarter, break_point_quarter, break_point_half))
+
+
+def yazdir(class_id, path, dir, image_id, folder):
+    files = os.listdir(path)
+
+    if len(files) >= 2:
+        for item in files:
+            file = path + "/" + item
+            if os.path.isfile(file):
+                image_id += 1
+                file_path = dir + "/" + item
+                folder.write(
+                    str(image_id) + " " + str(class_id) + " " + "1" + " " + str(file_path.replace('\\', '/')) + "\n")
+
+    return image_id
+
 
 # klasörleri listeleme
 for item in trainval:
@@ -54,10 +58,8 @@ for item in trainval:
         p = (args.path + "/" + item)
         image_id = yazdir(class_id, p, item, image_id, f_train)
 
-
 print("nb_train_all: %d" % image_id)
 temp_image_id = image_id
-
 
 for item in eval:
     if os.path.isdir(args.path + "/" + item):
@@ -66,4 +68,3 @@ for item in eval:
         image_id = yazdir(class_id, p, item, image_id, f_test)
 
 print("nb_test_all: %d" % (image_id - temp_image_id))
-
