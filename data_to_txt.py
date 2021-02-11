@@ -1,8 +1,9 @@
 import argparse
 import math
 import os
-import random
 import numpy as np
+
+from pathlib import Path
 
 parser = argparse.ArgumentParser(description='Train Data info')
 parser.add_argument('--path', default='example')
@@ -18,9 +19,9 @@ image_id = 0
 class_id = 0
 counts = []
 
-all = os.listdir(args.path)
-random.shuffle(all)
-folders = np.array([folder for folder in all if os.path.isdir(os.path.join(args.path, folder))])
+data_path = Path(args.path)
+folders = np.array([folder for folder in data_path.iterdir() if folder.is_dir() and len(list(folder.iterdir())) > 2])
+np.random.shuffle(folders)
 
 break_point_half = int(math.ceil(len(folders)))
 break_point_quarter = int(math.ceil(break_point_half / 2))
@@ -36,35 +37,26 @@ print(
     break_point3, break_point3, break_point_quarter, break_point_quarter, break_point_quarter, break_point_half))
 
 
-def yazdir(class_id, path, dir, image_id, folder):
-    files = os.listdir(path)
-
-    if len(files) >= 2:
-        for item in files:
-            file = path + "/" + item
-            if os.path.isfile(file):
-                image_id += 1
-                file_path = dir + "/" + item
-                folder.write(
-                    str(image_id) + " " + str(class_id) + " " + "1" + " " + str(file_path.replace('\\', '/')) + "\n")
+def yazdir(class_id, item, image_id, folder):
+    for file in item.iterdir():
+        image_id += 1
+        file_path = os.path.join(item.name, file.name)
+        folder.write(
+            str(image_id) + " " + str(class_id) + " " + "1" + " " + file_path + "\n")
 
     return image_id
 
 
 # klasörleri listeleme
 for item in trainval:
-    if os.path.isdir(args.path + "/" + item):
-        class_id += 1
-        p = (args.path + "/" + item)
-        image_id = yazdir(class_id, p, item, image_id, f_train)
+    class_id += 1
+    image_id = yazdir(class_id, item, image_id, f_train)
 
 print("nb_train_all: %d" % image_id)
 temp_image_id = image_id
 
 for item in eval:
-    if os.path.isdir(args.path + "/" + item):
-        class_id += 1
-        p = (args.path + "/" + item)
-        image_id = yazdir(class_id, p, item, image_id, f_test)
+    class_id += 1
+    image_id = yazdir(class_id, item, image_id, f_test)
 
 print("nb_test_all: %d" % (image_id - temp_image_id))

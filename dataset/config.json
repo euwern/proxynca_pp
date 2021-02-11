@@ -64,10 +64,10 @@
             "source": "str('/home/ubuntu/workstation/proxynca/shoes.h5')",
             "root": "str('/home/ubuntu/workstation/proxynca/shoes.h5')",
             "classes": {
-                "train": "range(0, 3460)",
-                 "val": "range(3460, 6920)",
-                 "trainval": "range(0, 6920)",
-                 "eval": "range(6920, 13839)"
+                "train": "range(0, 3451)",
+                 "val": "range(3451, 6902)",
+                 "trainval": "range(0, 6902)",
+                 "eval": "range(6902, 13804)"
             }
         },
         "sop_h5": {
