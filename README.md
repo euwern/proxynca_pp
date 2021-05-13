@@ -23,7 +23,6 @@ CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset sop  --config config/sop.json
 CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset sop  --config config/sop.json --mode trainval --apex --seed 0
 
 # INSHOP
-CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset inshop  --config config/inshop.json --mode train --apex --seed 0
 CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset inshop  --config config/inshop.json --mode trainval --apex --seed 0
 
 ```
