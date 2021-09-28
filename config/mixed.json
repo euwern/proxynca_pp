@@ -18,9 +18,9 @@
         "type": "torch.optim.lr_scheduler.MultiStepLR"
     },
     "nb_epochs": "40",
-    "sz_batch": "32*1",
+    "sz_batch": "32*6",
     "sz_embedding": "2048",
-    "num_class_per_batch": "32*1",
+    "num_class_per_batch": "32*2",
     "num_gradcum": "1",
     "is_random_sampler":"False",
     "transform_key": "str('transform_parameters')",
