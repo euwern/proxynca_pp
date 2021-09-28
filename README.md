@@ -16,7 +16,8 @@ To create data
 > python data_to_txt.py --path DATA_DIR
 
 # create hdf5 file
-> python dataset/make_shoes_hdf5.py --nb_train_all TRAIN_DATA_SIZE --nb_test_all TEST_DATA_SIZE --source DATA_DIR --output OUTPUT_PATH
+> python dataset/make_mixed_hdf5.py --nb_train_all TRAIN_DATA_SIZE --nb_test_all TEST_DATA_SIZE --source DATA_DIR --output OUTPUT_PATH
+
 ```
 
 To start training
@@ -27,7 +28,14 @@ nb_test_all: 106550
 ```
 
 > conda activate pytorch_p36
-> 
+
+# SOP
+CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset sop  --config config/sop.json --mode train --apex --seed 0
+CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset sop  --config config/sop.json --mode trainval --apex --seed 0
+
+# MIXED
+> python train.py --dataset mixed_h5  --config config/mixed.json --mode train --seed 0
+> python train.py --dataset mixed_h5  --config config/mixed.json --mode trainval --seed 0
 
 ```
 
@@ -40,5 +48,3 @@ The following is the Bibtex of our paper:
   year={2020}
 }
 ```
-# Önce train, sonrasında ise trainval çalıştıralacak.
-python dataset/make_mixed_hdf5.py --nb_train_all 22888 --nb_test_all 22478 --source /home/counterfake/workstation/datasets/proxy/mixed_v0_1 --output /home/counterfake/workstation/datasets/proxy/mixed_v0_1 
