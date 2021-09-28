@@ -1,14 +1,14 @@
 from .base import *
 
 
-class Shoes(BaseDatasetMod):
-    nb_train_all = 105516
-    nb_test_all = 108008
+class Mixed(BaseDatasetMod):
+    nb_train_all = 22888
+    nb_test_all = 22478
 
     def __init__(self, root, source, classes, transform=None):
         BaseDatasetMod.__init__(self, root, source, classes, transform)
-        classes_train = range(0, 10013)
-        classes_test = range(10013, 20025)
+        classes_train = range(0, 3910)
+        classes_test = range(3910, 7819)
 
         if classes.start in classes_train:
             if classes.stop - 1 in classes_train:
@@ -21,7 +21,7 @@ class Shoes(BaseDatasetMod):
         with open(
                 os.path.join(
                     root,
-                    'Shoes_{}.txt'.format('train' if train else 'test')
+                    'Ebay_{}.txt'.format('train' if train else 'test')
                 )
         ) as f:
 
@@ -43,18 +43,18 @@ class Shoes(BaseDatasetMod):
                 assert nb_images == type(self).nb_test_all
 
 
-class Shoes_hdf5(BaseDataset_hdf5):
-    def __init__(self, root, source, classes, transform = None):
+class Mixed_hdf5(BaseDataset_hdf5):
+    def __init__(self, root, source, classes, transform=None):
         BaseDataset_hdf5.__init__(self, root, source, classes, transform)
 
         index = 0
         self.data_y = h5py.File(root, 'r')
-        #self.all_labels = torch.Tensor(self.data_y['y']).squeeze().long()
-        #self.data_y.close()
-        #self.data_y = None
+        # self.all_labels = torch.Tensor(self.data_y['y']).squeeze().long()
+        # self.data_y.close()
+        # self.data_y = None
 
-        #for ix in tqdm(range(len(self.all_labels))):
-            #print(ix, self.all_labels[ix], self.all_labels[ix].item() in self.classes, self.all_labels[ix].item())
+        # for ix in tqdm(range(len(self.all_labels))):
+        # print(ix, self.all_labels[ix], self.all_labels[ix].item() in self.classes, self.all_labels[ix].item())
         for ix in range(len(self.data_y['y'])):
             curr_label = self.data_y['y'][ix].item()
             '''

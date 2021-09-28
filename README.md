@@ -8,23 +8,26 @@ This repo consists of the source code for the [ProxyNCA++ paper](https://arxiv.o
 Make sure to download the corresponding dataset to the correct folder as specified in dataset/config.json
 We also include script to convert the dataset to hdf5 format.
 
-To run the code
+To create data
 ```
-# CUB
-CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset cub  --config config/cub.json --mode train --apex --seed 0
-CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset cub  --config config/cub.json --mode trainval --apex --seed 0
+> conda activate pytorch_p36
 
-# CARS
-CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset cars  --config config/cars.json --mode train --apex --seed 0
-CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset cars  --config config/cars.json --mode trainval --apex --seed 0
+# create Shoes_train & Shoes_test files. This command outputs TRAIN_DATA_SIZE & TEST_DATA_SIZE
+> python data_to_txt.py --path DATA_DIR
 
-# SOP
-CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset sop  --config config/sop.json --mode train --apex --seed 0
-CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset sop  --config config/sop.json --mode trainval --apex --seed 0
+# create hdf5 file
+> python dataset/make_shoes_hdf5.py --nb_train_all TRAIN_DATA_SIZE --nb_test_all TEST_DATA_SIZE --source DATA_DIR --output OUTPUT_PATH
+```
 
-# INSHOP
-CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset inshop  --config config/inshop.json --mode train --apex --seed 0
-CUDA_VISIBLE_DEVICES=0,1 python train.py --dataset inshop  --config config/inshop.json --mode trainval --apex --seed 0
+To start training
+
+nb_train_all: 106974
+nb_test_all: 106550
+
+```
+
+> conda activate pytorch_p36
+> 
 
 ```
 
@@ -37,4 +40,5 @@ The following is the Bibtex of our paper:
   year={2020}
 }
 ```
-
+# Önce train, sonrasında ise trainval çalıştıralacak.
+python dataset/make_mixed_hdf5.py --nb_train_all 22888 --nb_test_all 22478 --source /home/counterfake/workstation/datasets/proxy/mixed_v0_1 --output /home/counterfake/workstation/datasets/proxy/mixed_v0_1 
