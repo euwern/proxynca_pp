@@ -1,7 +1,7 @@
 import os
 from .cars import Cars, Cars_hdf5
 from .cub import CUBirds, CUBirds_hdf5, CUBirds_class, CUBirds_hdf5_alt, CUBirds_hdf5_bb
-from .mixed import Mixed
+from .mixed import Mixed, Mixed_hdf5
 from .sop import SOProducts, SOProducts_hdf5
 from .inshop import InShop, InShop_hdf5
 from . import utils
@@ -28,6 +28,7 @@ _type = {
     'inshop': InShop,
     'inshop_h5': InShop_hdf5,
     'mixed': Mixed,
+    'mixed_h5': Mixed_hdf5,
 }
 
 
