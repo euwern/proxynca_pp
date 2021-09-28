@@ -51,18 +51,18 @@
             }
         },
         "shoes": {
-            "source": "str('/home/ubuntu/workstation/datasets/shoe')",
-            "root": "str('/home/ubuntu/workstation/datasets/shoe')",
+            "source": "str('/home/counterfake/workstation/web_scraping/data/six_pm')",
+            "root": "str('/home/counterfake/workstation/web_scraping/data/six_pm')",
             "classes": {
-                "train": "range(0, 10128)",
-                 "val": "range(10128, 20256)",
-                 "trainval": "range(0, 20256)",
-                 "eval": "range(20256, 40512)"
+                "train": "range(0, 5007)",
+                 "val": "range(5007, 10013)",
+                 "trainval": "range(0, 10013)",
+                 "eval": "range(10013, 20025)"
             }
         },
-        "shoes_h5": {
-            "source": "str('/home/ubuntu/workstation/proxynca/shoes.h5')",
-            "root": "str('/home/ubuntu/workstation/proxynca/shoes.h5')",
+         "shoes_h5": {
+            "source": "str('/home/counterfake/workstation/proxynca_pp/shoes.h5')",
+            "root": "str('/home/counterfake/workstation/proxynca_pp/shoes.h5')",
             "classes": {
                 "train": "range(0, 3451)",
                  "val": "range(3451, 6902)",
@@ -100,6 +100,28 @@
                 "eval": "range(0, 3985)"
 
             }
+
+        },
+        "mixed": {
+             "classes": {
+                "train": "range(0, 1955)",
+                "val": "range(1955, 3910)",
+                "trainval": "range(0, 3910)",
+                "eval": "range(3910, 7819)"
+            },
+            "source": "str('/home/counterfake/workstation/datasets/proxy/mixed_v0_1')",
+            "root": "str('/home/counterfake/workstation/datasets/proxy/mixed_v0_1')"
+        },
+        "mixed_h5": {
+            "classes": {
+                "train": "range(0, 1955)",
+                "val": "range(1955, 3910)",
+                "trainval": "range(0, 3910)",
+                "eval": "range(3910, 7819)"
+            },
+            "source": "str('/home/counterfake/workstation/datasets/proxy/mixed_V0_1/mixed.h5')",
+            "root": "str('/home/counterfake/workstation/datasets/proxy/mixed_V0_1/mixed.h5')"
+
         }
     },
      "transform_parameters": {

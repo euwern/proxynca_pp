@@ -9,7 +9,7 @@ import logging
 import loss
 import json
 import networks
-import networks_with_efficientnet
+# import networks_with_efficientnet
 import time
 import similarity
 
@@ -95,6 +95,7 @@ def predict_batchwise_inshop(model, dataloader):
     model.train()
     model.train(model_is_training) # revert to previous training state
     return result
+
 
 def evaluate(model, dataloader, eval_nmi=True, recall_list=[1,2,4,8]):
     eval_time = time.time()

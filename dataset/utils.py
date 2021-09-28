@@ -5,7 +5,7 @@ import torchvision
 from torchvision import transforms
 import PIL.Image
 import torch
-from torch._six import int_classes as _int_classes
+#from torch._six import int_classes as _int_classes
 import numpy as np
 import numbers
 
@@ -64,7 +64,6 @@ def make_transform(sz_resize=256, sz_crop=227, mean=None,
         mean = [104, 117, 128]
     return transforms.Compose([
         RGBToBGR() if rgb_to_bgr else Identity(),
-        transforms.Grayscale() if is_train else Identity(),
         transforms.RandomRotation(rotate) if is_train else Identity(),
         transforms.RandomResizedCrop(sz_crop) if is_train else Identity(),
         transforms.Resize(sz_resize) if not is_train else Identity(),
@@ -83,7 +82,8 @@ def make_transform(sz_resize=256, sz_crop=227, mean=None,
 
 class BatchSampler(torch.utils.data.sampler.Sampler):
     def __init__(self, batch_size, drop_last, dataset, sel_class):
-        if not isinstance(batch_size, _int_classes) or isinstance(batch_size, bool) or \
+        int_classes = int()
+        if not isinstance(batch_size, int_classes) or isinstance(batch_size, bool) or \
                 batch_size <= 0:
             raise ValueError("batch_size should be a positive integer value, "
                              "but got batch_size={}".format(batch_size))
@@ -121,7 +121,8 @@ class BatchSampler(torch.utils.data.sampler.Sampler):
 
 class RandomBatchSampler(torch.utils.data.sampler.Sampler):
     def __init__(self, labels, batch_size, drop_last, sel_class, nb_gradcum=1):
-        if not isinstance(batch_size, _int_classes) or isinstance(batch_size, bool) or \
+        int_classes = int()
+        if not isinstance(batch_size, int_classes) or isinstance(batch_size, bool) or \
                 batch_size <= 0:
             raise ValueError("batch_size should be a positive integer value, "
                              "but got batch_size={}".format(batch_size))

@@ -92,7 +92,9 @@ class BaseDataset_hdf5(torch.utils.data.Dataset):
 
         # print(curr_index, 'done')
         # convert gray to rgb
-        if len(list(im.split())) == 1: im = im.convert('RGB')
+        print(im)
+        if len(list(im.split())) == 1:
+            im = im.convert('RGB')
         if self.transform is not None:
             im = self.transform(im)
         return im, self.ys[index], index

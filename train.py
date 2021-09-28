@@ -34,7 +34,7 @@ parser.add_argument('--recall', default=[1, 2, 4, 8], nargs='+', type=int)
 parser.add_argument('--init_eval', default=False, action='store_true')
 parser.add_argument('--no_warmup', default=False, action='store_true')
 parser.add_argument('--apex', default=False, action='store_true')
-parser.add_argument('--warmup_k', default=0, type=int)
+parser.add_argument('--warmup_k', default=5, type=int)
 parser.add_argument('--model_path', default='', type=str)
 
 args = parser.parse_args()
@@ -57,6 +57,7 @@ out_results_fn = "log/%s_%s_%s_%s.json" % (args.dataset, curr_fn, args.mode, arg
 config = utils.load_config(args.config)
 
 dataset_config = utils.load_config('dataset/config.json')
+
 
 if args.source_dir != '':
     bs_name = os.path.basename(dataset_config['dataset'][args.dataset]['source'])
@@ -162,7 +163,6 @@ if is_random_sampler:
     batch_sampler = dataset.utils.RandomBatchSampler(tr_dataset.ys, args.sz_batch, True, num_class_per_batch,
                                                      num_gradcum)
 else:
-
     batch_sampler = dataset.utils.BalancedBatchSampler(torch.Tensor(tr_dataset.ys), num_class_per_batch,
                                                        int(args.sz_batch / num_class_per_batch))
 
@@ -402,14 +402,17 @@ for e in range(0, args.nb_epochs):
     time_per_epoch_2 = time.time()
     losses.append(np.mean(losses_per_epoch))
 
-    val_loss = 0
-
     if args.mode == 'trainval' and e % 4 == 0:
+        val_loss = 0
+
         val_losses_per_epoch = []
         for ct, (x, y, _) in tqdm(enumerate(dl_ev)):
             with torch.no_grad():
                 m = model(x.cuda())
-                loss = criterion(m, y.cuda())
+                loss_val = criterion(m, y.cuda())
+                val_losses_per_epoch.append(loss_val.data.cpu().numpy())
+
+        val_loss = np.mean(val_losses_per_epoch)
 
     print('it: {}'.format(it))
     print(opt)
