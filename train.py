@@ -402,9 +402,9 @@ for e in range(0, args.nb_epochs):
     time_per_epoch_2 = time.time()
     losses.append(np.mean(losses_per_epoch))
 
-    if args.mode == 'trainval' and e % 4 == 0:
-        val_loss = 0
+    val_loss = 0
 
+    if args.mode == 'trainval' and e % 4 == 0:
         val_losses_per_epoch = []
         for ct, (x, y, _) in tqdm(enumerate(dl_ev)):
             with torch.no_grad():
