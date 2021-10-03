@@ -58,7 +58,6 @@ config = utils.load_config(args.config)
 
 dataset_config = utils.load_config('dataset/config.json')
 
-
 if args.source_dir != '':
     bs_name = os.path.basename(dataset_config['dataset'][args.dataset]['source'])
     dataset_config['dataset'][args.dataset]['source'] = os.path.join(args.source_dir, bs_name)
