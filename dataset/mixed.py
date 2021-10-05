@@ -2,13 +2,13 @@ from .base import *
 
 
 class Mixed(BaseDatasetMod):
-    nb_train_all = 22888
-    nb_test_all = 22478
+    nb_train_all = 26018
+    nb_test_all = 25111
 
     def __init__(self, root, source, classes, transform=None):
         BaseDatasetMod.__init__(self, root, source, classes, transform)
-        classes_train = range(0, 3910)
-        classes_test = range(3910, 7819)
+        classes_train = range(0, 2195)
+        classes_test = range(4390, 8779)
 
         if classes.start in classes_train:
             if classes.stop - 1 in classes_train:

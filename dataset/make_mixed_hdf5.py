@@ -19,7 +19,7 @@ img_count = nb_train_all + nb_test_all
 
 source = args.source
 output = args.output
-data = h5py.File(os.path.join(output, 'mixed.h5'), 'w-')
+data = h5py.File(os.path.join(output, 'mixed_v0_2.h5'), 'w-')
 dt = h5py.special_dtype(vlen=np.dtype('uint8'))
 data.create_dataset(name='x', shape=(img_count,), dtype=dt)
 data.create_dataset(name='y', shape=(img_count, 1), dtype='int32')
