@@ -69,7 +69,18 @@ def make_transform(sz_resize=256, sz_crop=227, mean=None,
         transforms.Resize(sz_resize) if not is_train else Identity(),
         transforms.CenterCrop(sz_crop) if not is_train else Identity(),
         transforms.RandomHorizontalFlip() if is_train else Identity(),
-        transforms.ColorJitter(brightness=jitter, contrast=jitter, saturation=jitter, hue=hue) if is_train else Identity(),
+        #transforms.ColorJitter(brightness=jitter, contrast=jitter, saturation=jitter, hue=hue) if is_train else Identity(),
+        
+        #### New Added ####
+        transforms.RandomPerspective() if is_train else Identity(),
+        transforms.RandomEqualize() if is_train else Identity(),
+        transforms.RandomVerticalFlip() if is_train else Identity(),
+        transforms.RandomAdjustSharpness(sharpness_factor = 2) if is_train else Identity(),
+        transforms.RandomAutocontrast() if is_train else Identity(),
+        transforms.RandomErasing() if is_train else Identity(),
+        transforms.RandomAffine(degrees=(-60, 60), translate=(0.1, 0.3), scale=(0.5, 0.75)) if is_train else Identity(),
+        #### New Added ####
+
         transforms.ToTensor(),
         ScaleIntensities(
             *intensity_scale) if intensity_scale is not None else Identity(),
