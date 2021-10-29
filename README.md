@@ -36,4 +36,8 @@ The following is the Bibtex of our paper:
   year={2020}
 }
 ```
+### Acknowledgement
+We want to thank dichotomies for sharing their ProxyNCA implementation (https://github.com/dichotomies/proxy-nca.). 
+In our work, we extend their codebase structure to create ProxyNCA++. 
+
 
